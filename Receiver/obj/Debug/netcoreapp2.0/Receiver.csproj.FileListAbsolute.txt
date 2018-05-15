@@ -1,0 +1,11 @@
+c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\bin\Debug\netcoreapp2.0\Receiver.deps.json
+c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\bin\Debug\netcoreapp2.0\Receiver.runtimeconfig.json
+c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\bin\Debug\netcoreapp2.0\Receiver.runtimeconfig.dev.json
+c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\bin\Debug\netcoreapp2.0\Receiver.dll
+c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\obj\Debug\netcoreapp2.0\Receiver.csproj.CoreCompileInputs.cache
+c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\obj\Debug\netcoreapp2.0\Receiver.AssemblyInfoInputs.cache
+c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\obj\Debug\netcoreapp2.0\Receiver.AssemblyInfo.cs
+c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\bin\Debug\netcoreapp2.0\Receiver.pdb
+c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\obj\Debug\netcoreapp2.0\Receiver.csprojAssemblyReference.cache
+c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\obj\Debug\netcoreapp2.0\Receiver.dll
+c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\obj\Debug\netcoreapp2.0\Receiver.pdb
