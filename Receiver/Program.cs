@@ -4,14 +4,11 @@ using RabbitMQ.Client.Events;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using Receiver.DTO;
+using Receiver.DeSerialization;
+using System.Threading.Tasks;
+using System.Threading;
 
-class ClientPropertise
-{
-    public string qName { get; set; }
-    public string Body { get; set; }
-    public string CorellationId { get; set; }
-
-}
 class RPCServer
 {
     private static List<ClientPropertise> ClientsList = new List<ClientPropertise>();
@@ -29,25 +26,53 @@ class RPCServer
 
             consumer.Received += (model, ea) =>
             {
-                string messageBody = Encoding.UTF8.GetString(ea.Body);               
-                Console.WriteLine(messageBody);
                 IBasicProperties props = ea.BasicProperties;
-                var replyProps = channel.CreateBasicProperties();
-                replyProps.CorrelationId = props.CorrelationId;
                 if (ClientsList.Where((c) => c.qName == props.ReplyTo).Count() == 0)
-                    ClientsList.Add(new ClientPropertise() { qName = props.ReplyTo, Body = messageBody, CorellationId = props.CorrelationId });
-                if (messageBody == "ping")
-                    return;
-                foreach (ClientPropertise p in ClientsList)
                 {
-                    if (props.ReplyTo != p.qName)
-                        channel.BasicPublish(exchange: "", routingKey: p.qName, basicProperties: replyProps, body: ea.Body);
+                    ClientsList.Add(new ClientPropertise() { qName = props.ReplyTo, Body = Encoding.UTF8.GetString(ea.Body), CorellationId = props.CorrelationId });
+                }
+                switch (ea.BasicProperties.CorrelationId)
+                {
+                    case ObjectCategory.Message:
+                        Message mess = ea.Body.Deserializer<Message>();
+                        var replyProps = channel.CreateBasicProperties();
+                        replyProps.CorrelationId = props.CorrelationId;
+
+                        foreach (ClientPropertise p in ClientsList)
+                        {
+                            if (props.ReplyTo != p.qName)
+                                channel.BasicPublish(exchange: "", routingKey: p.qName, basicProperties: replyProps, body: ea.Body);
+                        }
+
+                        break;
+                    case ObjectCategory.StatusInfo:
+                        StatusInfo status = ea.Body.Deserializer<StatusInfo>();
+                        return;
+                        break;
+                    default:
+                        break;
                 }
 
-            };
 
+            };
+            pingToAll();
             Console.WriteLine(" Press [enter] to exit.");
             Console.ReadLine();
         }
+    }
+    //протестить если один ушел в оффлайн. Но в коллекции он есть...
+    private static void pingToAll()
+    {
+        Task.Run(() =>
+        {
+            while (true)
+            {
+                foreach (ClientPropertise c in ClientsList)
+                {
+                    c.ReplyTo//нет в коллекции
+                }
+                Thread.Sleep(5000);
+            }
+        });
     }
 }
