@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Receiver.DTO
+namespace DTO
 {
-    class StatusInfo
+    [Serializable]
+    public class StatusInfo
     {
         bool IsOnline { get; set; }
     }

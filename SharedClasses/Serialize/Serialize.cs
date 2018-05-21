@@ -23,7 +23,7 @@ namespace Receiver.DeSerialization
 
         public static T Deserializer<T>(this byte[] _byteArray)
         {
-            T ReturnValue;
+            T ReturnValue = default(T);
             using (var _MemoryStream = new MemoryStream(_byteArray))
             {
                 IFormatter _BinaryFormatter = new BinaryFormatter();

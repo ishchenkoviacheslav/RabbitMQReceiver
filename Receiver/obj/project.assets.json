@@ -1176,6 +1176,16 @@
         "compile": {
           "ref/netstandard1.2/System.Threading.Timer.dll": {}
         }
+      },
+      "SharedClasses/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/SharedClasses.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SharedClasses.dll": {}
+        }
       }
     }
   },
@@ -4177,12 +4187,18 @@
         "system.threading.timer.4.3.0.nupkg.sha512",
         "system.threading.timer.nuspec"
       ]
+    },
+    "SharedClasses/1.0.0": {
+      "type": "project",
+      "path": "../SharedClasses/SharedClasses.csproj",
+      "msbuildProject": "../SharedClasses/SharedClasses.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.NETCore.App >= 2.0.0",
-      "RabbitMQ.Client >= 5.0.1"
+      "RabbitMQ.Client >= 5.0.1",
+      "SharedClasses >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4193,11 +4209,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\users\\user\\documents\\visual studio 2017\\Projects\\Receiver\\Receiver\\Receiver.csproj",
+      "projectUniqueName": "C:\\Users\\user\\documents\\visual studio 2017\\Projects\\Receiver\\Receiver\\Receiver.csproj",
       "projectName": "Receiver",
-      "projectPath": "c:\\users\\user\\documents\\visual studio 2017\\Projects\\Receiver\\Receiver\\Receiver.csproj",
+      "projectPath": "C:\\Users\\user\\documents\\visual studio 2017\\Projects\\Receiver\\Receiver\\Receiver.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "c:\\users\\user\\documents\\visual studio 2017\\Projects\\Receiver\\Receiver\\obj\\",
+      "outputPath": "C:\\Users\\user\\documents\\visual studio 2017\\Projects\\Receiver\\Receiver\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
@@ -4217,7 +4233,11 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\user\\documents\\visual studio 2017\\Projects\\Receiver\\SharedClasses\\SharedClasses.csproj": {
+              "projectPath": "C:\\Users\\user\\documents\\visual studio 2017\\Projects\\Receiver\\SharedClasses\\SharedClasses.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

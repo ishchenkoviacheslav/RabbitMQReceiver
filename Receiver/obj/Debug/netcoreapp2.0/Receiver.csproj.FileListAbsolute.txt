@@ -9,3 +9,6 @@ c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\bin\Debug\
 c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\obj\Debug\netcoreapp2.0\Receiver.csprojAssemblyReference.cache
 c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\obj\Debug\netcoreapp2.0\Receiver.dll
 c:\users\user\documents\visual studio 2017\Projects\Receiver\Receiver\obj\Debug\netcoreapp2.0\Receiver.pdb
+C:\Users\user\documents\visual studio 2017\Projects\Receiver\Receiver\bin\Debug\netcoreapp2.0\SharedClasses.dll
+C:\Users\user\documents\visual studio 2017\Projects\Receiver\Receiver\bin\Debug\netcoreapp2.0\SharedClasses.pdb
+C:\Users\user\documents\visual studio 2017\Projects\Receiver\Receiver\obj\Debug\netcoreapp2.0\Receiver.csproj.CopyComplete

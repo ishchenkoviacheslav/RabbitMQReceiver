@@ -5,16 +5,19 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Receiver.DTO;
-using Receiver.DeSerialization;
 using System.Threading.Tasks;
 using System.Threading;
+using Receiver.DeSerialization;
+using DTO;
 
 class RPCServer
 {
     private static List<ClientPropertise> ClientsList = new List<ClientPropertise>();
+
     public static void Main()
     {
-        var factory = new ConnectionFactory() { HostName = "localhost" };
+        var factory = new ConnectionFactory() { UserName = "slavik", Password = "slavik", HostName = "localhost" };
+        //var factory = new ConnectionFactory() { HostName = "localhost" };
         using (var connection = factory.CreateConnection())
         using (var channel = connection.CreateModel())
         {
@@ -29,39 +32,44 @@ class RPCServer
                 IBasicProperties props = ea.BasicProperties;
                 if (ClientsList.Where((c) => c.qName == props.ReplyTo).Count() == 0)
                 {
-                    ClientsList.Add(new ClientPropertise() { qName = props.ReplyTo, Body = Encoding.UTF8.GetString(ea.Body), CorellationId = props.CorrelationId });
+                    ClientsList.Add(new ClientPropertise() { qName = props.ReplyTo, CorellationId = props.CorrelationId, LastUpTime = DateTime.UtcNow });
                 }
                 switch (ea.BasicProperties.CorrelationId)
                 {
                     case ObjectCategory.Message:
                         Message mess = ea.Body.Deserializer<Message>();
-                        var replyProps = channel.CreateBasicProperties();
+                        IBasicProperties replyProps = channel.CreateBasicProperties();
                         replyProps.CorrelationId = props.CorrelationId;
-
                         foreach (ClientPropertise p in ClientsList)
                         {
                             if (props.ReplyTo != p.qName)
-                                channel.BasicPublish(exchange: "", routingKey: p.qName, basicProperties: replyProps, body: ea.Body);
+                                channel.BasicPublish(exchange: "", routingKey: p.qName, basicProperties: replyProps, body: mess.Serializer());
                         }
 
                         break;
                     case ObjectCategory.StatusInfo:
                         StatusInfo status = ea.Body.Deserializer<StatusInfo>();
+                        ClientsList.ForEach((c) =>
+                        {
+                            if (c.qName == ea.BasicProperties.ReplyTo)
+                            {
+                                c.LastUpTime = DateTime.UtcNow;
+                            }
+                        });
+                        
                         return;
                         break;
                     default:
                         break;
                 }
-
-
             };
-            pingToAll();
+            PingToAll(channel);
             Console.WriteLine(" Press [enter] to exit.");
             Console.ReadLine();
         }
     }
-    //протестить если один ушел в оффлайн. Но в коллекции он есть...
-    private static void pingToAll()
+    //протестить если один ушел в оффлайн.Но в коллекции он есть...
+    private static void PingToAll(IModel channel)
     {
         Task.Run(() =>
         {
@@ -69,8 +77,18 @@ class RPCServer
             {
                 foreach (ClientPropertise c in ClientsList)
                 {
-                    c.ReplyTo//нет в коллекции
+                    IBasicProperties prop = channel.CreateBasicProperties();
+                    prop.CorrelationId = ObjectCategory.StatusInfo;
+                    channel.BasicPublish(exchange: "", routingKey: c.qName, basicProperties: prop, body: null);
                 }
+                ClientsList.RemoveAll((c) =>
+                {
+                    return DateTime.UtcNow.Subtract(c.LastUpTime) > new TimeSpan(0, 0, 30);
+                });
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                ClientsList.ForEach((c) => Console.WriteLine(c.qName));
+                Console.WriteLine(ClientsList.Count);
                 Thread.Sleep(5000);
             }
         });

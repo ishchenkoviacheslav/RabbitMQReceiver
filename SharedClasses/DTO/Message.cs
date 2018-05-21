@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Receiver.DTO
+namespace DTO
 {
-    class Message
+    [Serializable]
+    public class Message
     {
         public string UserName { get; set; }
         public string UserMessage { get; set; }

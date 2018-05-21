@@ -1,0 +1,8 @@
+C:\Users\user\documents\visual studio 2017\Projects\Receiver\SharedClasses\bin\Debug\netcoreapp2.0\SharedClasses.deps.json
+C:\Users\user\documents\visual studio 2017\Projects\Receiver\SharedClasses\bin\Debug\netcoreapp2.0\SharedClasses.dll
+C:\Users\user\documents\visual studio 2017\Projects\Receiver\SharedClasses\bin\Debug\netcoreapp2.0\SharedClasses.pdb
+C:\Users\user\documents\visual studio 2017\Projects\Receiver\SharedClasses\obj\Debug\netcoreapp2.0\SharedClasses.csproj.CoreCompileInputs.cache
+C:\Users\user\documents\visual studio 2017\Projects\Receiver\SharedClasses\obj\Debug\netcoreapp2.0\SharedClasses.AssemblyInfoInputs.cache
+C:\Users\user\documents\visual studio 2017\Projects\Receiver\SharedClasses\obj\Debug\netcoreapp2.0\SharedClasses.AssemblyInfo.cs
+C:\Users\user\documents\visual studio 2017\Projects\Receiver\SharedClasses\obj\Debug\netcoreapp2.0\SharedClasses.dll
+C:\Users\user\documents\visual studio 2017\Projects\Receiver\SharedClasses\obj\Debug\netcoreapp2.0\SharedClasses.pdb
